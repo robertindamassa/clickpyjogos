@@ -26,6 +26,12 @@ COLUNAS = len(LABIRINTO[0])
 TAMANHO_CELULA = 40
 LARGURA_TELA = COLUNAS * TAMANHO_CELULA
 ALTURA_TELA = LINHAS * TAMANHO_CELULA
+pygame.init()
+pygame.mixer.init()
+
+pygame.mixer.music.load("pacmantheme.ogg")
+pygame.mixer.music.play(-1)
+pygame.mixer.music.set_volume(0.2)
 
 def main():
     pygame.init()

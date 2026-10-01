@@ -2,10 +2,17 @@ import pygame
 
 # inicializar
 pygame.init()
+pygame.mixer.init()
+
+
 
 tamanho_tela = (800, 800)
 tela = pygame.display.set_mode(tamanho_tela)
 pygame.display.set_caption("Brick Breaker Youtube")
+
+pygame.mixer.music.load("bitsong.ogg")
+pygame.mixer.music.play(-1)
+pygame.mixer.music.set_volume(0.2) 
 
 tamanho_bola = 15
 bola = pygame.Rect(100, 500, tamanho_bola, tamanho_bola)
