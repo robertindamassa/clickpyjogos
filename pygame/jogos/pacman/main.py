@@ -1,3 +1,4 @@
+import asyncio
 import sys
 import pygame
 
@@ -29,14 +30,17 @@ ALTURA_TELA = LINHAS * TAMANHO_CELULA
 pygame.init()
 pygame.mixer.init()
 
-pygame.mixer.music.load("pacmantheme.ogg")
-pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0.2)
+try:
+    pygame.mixer.music.load("pacmantheme.ogg")
+    pygame.mixer.music.play(-1)
+    pygame.mixer.music.set_volume(0.2)
+except Exception as e:
+    print("Aviso de áudio:", e)
 
-def main():
+async def main():
     pygame.init()
     tela = pygame.display.set_mode((LARGURA_TELA, ALTURA_TELA))
-    pygame.display.set_caption("Aula 3 - Orientando a Objeto e aplicando pontuação")
+    pygame.display.set_caption("Pac-Man ClickPyJogos")
     relogio = pygame.time.Clock()
     fonte = pygame.font.SysFont(None, 28)
 
@@ -45,7 +49,7 @@ def main():
 
     if not jogo.labirinto:
         print("LABIRINTO INVALIDO")
-        sys.exit()
+        return
 
     while rodando:
         rodando = jogo.evento()
@@ -65,12 +69,11 @@ def main():
         jogo.desenhar_fim_de_jogo(tela, LARGURA_TELA, ALTURA_TELA)
 
         pygame.display.flip()
-        relogio.tick(jogo.frame)
-
-
+        fps = jogo.frame if jogo.frame > 0 else 60
+        relogio.tick(fps)
+        await asyncio.sleep(0)
 
     pygame.quit()
 
-
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

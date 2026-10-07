@@ -1,0 +1,684 @@
+/* Fundo principal da página usando a imagem pixel_fundo.png */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #33200f;
+    background-image: url("imagens/pixel_fundo.png");
+    background-repeat: repeat;
+    background-position: top left;
+}
+
+.topo {
+    min-height: 76px;
+    padding: 12px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: #ffbf47;
+    box-shadow: 0 3px 8px rgba(70, 43, 10, 0.18);
+}
+
+.logo {
+    display: block;
+    width: 300px;
+    max-width: 45%;
+}
+
+.logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.menu {
+    display: flex;
+    gap: 28px;
+}
+
+.menu a {
+    color: #33200f;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    color: #a34816;
+}
+
+.hero {
+    min-height: 390px;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+}
+
+.hero-conteudo {
+    width: 1100px;
+    max-width: 90%;
+    min-height: 390px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 36px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-texto {
+    max-width: 520px;
+}
+
+.hero-texto h1 {
+    margin: 0;
+    font-family: "Courier New", monospace;
+    font-size: clamp(42px, 5vw, 58px);
+    line-height: 0.95;
+    font-weight: 900;
+    color: #3b1805;
+    text-shadow: 3px 3px 0 #ffb866;
+}
+
+.hero-texto p {
+    margin: 20px 0 0;
+    font-family: Arial, sans-serif;
+    font-size: 19px;
+    color: #66330d;
+}
+
+.hero-controle {
+    display: block;
+    width: min(32vw, 300px);
+    height: auto;
+    flex: 0 1 300px;
+}
+
+.botoes-hero {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.btn-jogar {
+    display: inline-block;
+    width: 190px;
+    margin-top: 0;
+}
+
+.btn-jogar img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Seção de jogos em destaque com contorno branco e fundo transparente */
+.destaques {
+    width: 1100px;
+    max-width: 90%;
+    margin: 40px auto;
+    padding: 30px;
+    box-sizing: border-box;
+    /* Fundo transparente para ver o pixel_fundo.png atrás */
+    background-color: rgba(255, 255, 255, 0.15);
+    /* Contorno (borda) branco */
+    border: 4px solid #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.titulo-destaques {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.titulo-esquerda {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.icone-fogo {
+    font-size: 24px;
+}
+
+.titulo-esquerda h2 {
+    margin: 0;
+    color: #351700;
+    font-family: "Courier New", monospace;
+    font-size: 21px;
+}
+
+.jogos-destaque {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+}
+
+.card-jogo {
+    overflow: hidden;
+    background: #ffffff;
+    border: 2px solid #f19a29;
+    border-radius: 10px;
+    box-shadow: 3px 4px 0 rgba(241, 154, 41, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-jogo:hover {
+    transform: translateY(-4px);
+    box-shadow: 4px 8px 0 #e89020;
+}
+
+.capa-jogo {
+    width: 100%;
+    height: 140px;
+    overflow: hidden;
+    background-color: #222222;
+    display: block;
+}
+
+.capa-jogo img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+}
+
+.info-jogo {
+    padding: 11px;
+}
+
+.info-jogo h3 {
+    margin: 0 0 10px;
+    color: #301500;
+    font-size: 14px;
+}
+
+.botao-jogar {
+    display: block;
+    padding: 9px 5px;
+    background: #ffb52b;
+    border: 2px solid #e68000;
+    color: #351600;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+}
+
+.botao-jogar:hover {
+    background: #ffc744;
+}
+
+.jogos-futuros {
+    width: 1100px;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0 0 40px;
+}
+
+.lista-jogos-futuros {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.card-futuro {
+    min-height: 145px;
+    padding: 14px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #ffffff;
+    border: 3px solid #000000;
+    border-radius: 8px;
+    box-shadow: 4px 4px 0 #000000;
+    color: #000000;
+    text-align: center;
+}
+
+.aviso-futuro {
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.card-futuro h3 {
+    margin: 0;
+    font-family: "Courier New", monospace;
+    font-size: 16px;
+    color: #000000;
+}
+
+.botao-breve {
+    width: 100%;
+    padding: 8px 5px;
+    background: #000000;
+    border: 2px solid #000000;
+    color: #ffffff;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+@media (max-width: 1000px) {
+    .jogos-destaque {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .lista-jogos-futuros {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .topo {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .logo {
+        width: 260px;
+        max-width: 100%;
+    }
+
+    .menu {
+        gap: 18px;
+    }
+
+    .hero-conteudo {
+        min-height: 390px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 36px 0;
+        box-sizing: border-box;
+    }
+
+    .hero-texto h1 {
+        font-size: clamp(36px, 10vw, 48px);
+    }
+
+    .hero-texto p {
+        font-size: 16px;
+    }
+
+    .hero-controle {
+        position: absolute;
+        width: min(34vw, 150px);
+        right: 0;
+        bottom: 14px;
+    }
+
+    .btn-jogar {
+        width: 180px;
+    }
+
+    .jogos-destaque {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .lista-jogos-futuros {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .titulo-esquerda h2 {
+        font-size: 16px;
+    }
+
+    .rodape {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .rodape-contato {
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 450px) {
+    .jogos-destaque {
+        grid-template-columns: 1fr;
+    }
+
+    .lista-jogos-futuros {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+.btn-adicionar-hero {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #ff6f00;
+    color: #ffffff;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    font-weight: bold;
+    border: 3px solid #33200f;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 #33200f;
+    transition: transform 0.1s, background-color 0.2s;
+}
+
+.btn-adicionar-hero:hover {
+    background-color: #e65100;
+    transform: translateY(-2px);
+}
+
+/* Estilo do Modal Pop-up do Formulário */
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-conteudo {
+    background-color: #ffffff;
+    border: 4px solid #000000;
+    border-radius: 12px;
+    width: 460px;
+    max-width: 90%;
+    padding: 24px;
+    position: relative;
+    box-shadow: 6px 6px 0 #000000;
+    color: #000000;
+}
+
+.fechar-modal {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #000000;
+}
+
+.modal-conteudo h2 {
+    margin-top: 0;
+    font-family: "Courier New", monospace;
+    font-size: 20px;
+    color: #000000;
+}
+
+.campo {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.campo label {
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: #000000;
+}
+
+.campo input {
+    padding: 10px;
+    border: 2px solid #000000;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.mensagem-erro {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 2px solid #c62828;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.mensagem-sucesso {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 2px solid #2e7d32;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.btn-enviar-pedido {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff9800;
+    color: #000000;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    font-size: 15px;
+    border: 2px solid #000000;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 3px 3px 0 #000000;
+}
+
+.btn-enviar-pedido:hover {
+    background-color: #f57c00;
+}
+
+/* Estilos do Modal Pop-up "Sobre Nós" */
+.modal-sobre-conteudo {
+    width: 580px;
+    max-width: 90%;
+}
+
+.texto-sobre-nos {
+    text-align: left;
+    line-height: 1.6;
+    font-size: 15px;
+    color: #222222;
+    margin: 20px 0;
+}
+
+.texto-sobre-nos p {
+    margin-bottom: 14px;
+}
+
+.btn-fechar-sobre {
+    width: 100%;
+    padding: 10px;
+    background-color: #333333;
+    color: #ffffff;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid #000000;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 #000000;
+}
+
+.btn-fechar-sobre:hover {
+    background-color: #111111;
+}
+
+/* Estilos da página de jogar */
+.jogar-container {
+    width: 1000px;
+    max-width: 95%;
+    margin: 25px auto 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cabecalho-jogo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-voltar {
+    background-color: #3b1805;
+    color: #ffffff;
+    padding: 10px 18px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 6px;
+    font-family: "Courier New", monospace;
+    border: 2px solid #ffb52b;
+    transition: background-color 0.2s;
+}
+
+.btn-voltar:hover {
+    background-color: #66330d;
+}
+
+.titulo-jogo {
+    margin: 0;
+    color: #3b1805;
+    font-family: "Courier New", monospace;
+    font-size: 26px;
+    text-shadow: 1px 1px 0 #ffbf47;
+}
+
+.barra-ferramentas {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-acao {
+    background-color: #ffb52b;
+    color: #33200f;
+    border: 2px solid #e68000;
+    padding: 8px 14px;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+}
+
+.btn-acao:hover {
+    background-color: #ffc744;
+}
+
+.btn-tela-cheia {
+    background-color: #ffb52b;
+    color: #33200f;
+    border: 2px solid #e68000;
+    padding: 8px 14px;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+}
+
+.btn-tela-cheia:hover {
+    background-color: #ffc744;
+}
+
+.janela-jogo {
+    width: 100%;
+    height: 640px;
+    background-color: #000000;
+    border: 4px solid #ffb52b;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    position: relative;
+}
+
+.janela-jogo iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+.painel-controles {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border: 2px solid #e68000;
+    border-radius: 8px;
+    padding: 20px 25px;
+    box-sizing: border-box;
+    box-shadow: 3px 4px 0 rgba(230, 128, 0, 0.25);
+}
+
+.painel-controles h3 {
+    margin: 0 0 10px 0;
+    color: #3b1805;
+    font-size: 18px;
+    font-family: "Courier New", monospace;
+}
+
+.painel-controles .caixa-teclas {
+    background-color: #fff9e6;
+    border: 1px dashed #d48800;
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #8a4800;
+    font-size: 15px;
+}
+
+.rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px 6%;
+    background-color: #33200f;
+    color: #ffffff;
+}
+
+.rodape-frase {
+    margin: 0;
+    font-family: "Courier New", monospace;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.rodape-contato {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.rodape-contato a {
+    color: #ffffff;
+}
+

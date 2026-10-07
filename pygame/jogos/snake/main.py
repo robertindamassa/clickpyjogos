@@ -1,12 +1,23 @@
-# configurações iniciais
+import asyncio
 import json
 import pygame
 import random
 
 pygame.init()
+pygame.mixer.init()
+try:
+    pygame.mixer.music.load("snakey.ogg")
+    pygame.mixer.music.play(-1)
+    pygame.mixer.music.set_volume(0.2)
+except Exception as e:
+    print("Aviso de áudio:", e)
+
 pygame.display.set_caption("Jogo Snake Python")
 largura, altura = 800, 600
 tela = pygame.display.set_mode((largura, altura))
+imagemdefund = pygame.image.load("fundopy.png")
+imagem_fundo = pygame.transform.scale(imagemdefund, (largura, altura))
+
 relogio = pygame.time.Clock()
 fonte_titulo = pygame.font.SysFont(None, 34)
 fonte_sub = pygame.font.SysFont(None, 22)
@@ -28,7 +39,7 @@ def gerar_comida():
     return comida_x, comida_y
 
 def desenhar_comida(tamanho, comida_x, comida_y):
-    pygame.draw.rect(tela, verde, [comida_x, comida_y, tamanho, tamanho])
+    pygame.draw.rect(tela, vermelha, [comida_x, comida_y, tamanho, tamanho])
 
 def desenhar_cobra(tamanho, pixels):
     for pixel in pixels:
@@ -70,12 +81,15 @@ def carregar_recorde():
         with open(arquivo_recorde, "r", encoding="utf-8") as arquivo:
             dados = json.load(arquivo)
             return dados.get("recorde", 0)
-    except FileNotFoundError:
+    except Exception:
         return 0
 
 def salvar_recorde(recorde):
-    with open(arquivo_recorde, "w", encoding="utf-8") as arquivo:
-        json.dump({"recorde": recorde}, arquivo)
+    try:
+        with open(arquivo_recorde, "w", encoding="utf-8") as arquivo:
+            json.dump({"recorde": recorde}, arquivo)
+    except Exception:
+        pass
 
 def selecionar_velocidade(tecla, velocidade_x, velocidade_y):
     if tecla == pygame.K_DOWN and velocidade_y != -tamanho_quadrado:
@@ -92,7 +106,7 @@ def selecionar_velocidade(tecla, velocidade_x, velocidade_y):
         velocidade_y = 0
     return velocidade_x, velocidade_y
 
-def rodar_jogo():
+async def main():
     recorde = carregar_recorde()
     rodando = True
 
@@ -107,7 +121,7 @@ def rodar_jogo():
         comida_x, comida_y = gerar_comida()
 
         while rodando and not fim_jogo:
-            tela.fill(preta)
+            tela.blit(imagemdefund, (0, 0))
 
             for evento in pygame.event.get():
                 if evento.type == pygame.QUIT:
@@ -148,9 +162,10 @@ def rodar_jogo():
             desenhar_pontuacao(pontuacao)
             pygame.display.update()
             relogio.tick(velocidade_jogo)
+            await asyncio.sleep(0)
 
         while rodando and fim_jogo:
-            tela.fill(preta)
+            tela.blit(imagemdefund, (0, 0))
             desenhar_fim_jogo(recorde)
             pygame.display.update()
 
@@ -161,6 +176,7 @@ def rodar_jogo():
                     fim_jogo = False
 
             relogio.tick(velocidade_jogo)
+            await asyncio.sleep(0)
 
-
-rodar_jogo()
+if __name__ == "__main__":
+    asyncio.run(main())

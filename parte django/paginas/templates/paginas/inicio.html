@@ -1,0 +1,233 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CLICKPYJOGOS</title>
+    <link rel="stylesheet" href="{% static 'paginas/estilo.css' %}?v=11">
+</head>
+
+<body>
+    <header class="topo">
+        <a class="logo" href="#inicio">
+            <img src="{% static 'paginas/imagens/clickpyjogos_logo.png' %}" alt="CLICKPYJOGOS">
+        </a>
+
+        <nav class="menu">
+            <a href="#inicio">Início</a>
+            <a href="#jogos">Jogos</a>
+            <a href="#modalSobre" onclick="abrirModalSobre(); return false;">Sobre</a>
+        </nav>
+    </header>
+
+    <main id="inicio">
+        <section class="hero">
+            <div class="hero-conteudo">
+                <div class="hero-texto">
+                    <h1>JOGUE JOGOS<br>EM PYGAME<br>ONLINE</h1>
+                    <p>Encontre jogos incríveis e divirta-se!</p>
+                    <div class="botoes-hero">
+                        <a href="#jogos" class="btn-jogar">
+                            <img src="{% static 'paginas/imagens/ver_jogos_button.png' %}" alt="Ver jogos">
+                        </a>
+                        <button class="btn-adicionar-hero" onclick="abrirModal()">ADICIONAR SEU JOGO!</button>
+                    </div>
+                </div>
+
+                <img class="hero-controle" src="{% static 'paginas/imagens/pixel_controle.png' %}"
+                    alt="Controle de videogame pixelado">
+            </div>
+        </section>
+    </main>
+
+    <section class="destaques" id="jogos">
+        <div class="titulo-destaques">
+            <div class="titulo-esquerda">
+                <h2>🔥 JOGOS EM DESTAQUE</h2>
+            </div>
+        </div>
+
+        <div class="jogos-destaque">
+            {% for jogo in jogos.values %}
+            <div class="card-jogo">
+                <div class="capa-jogo">
+                    <img src="{% static jogo.imagem %}" alt="{{ jogo.titulo }}">
+                </div>
+                <div class="info-jogo">
+                    <h3>{{ jogo.nome }}</h3>
+                    <a href="{% url 'jogar' jogo.slug %}" class="botao-jogar">▶ Jogar agora</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="jogos-futuros">
+        <div class="titulo-destaques">
+            <div class="titulo-esquerda">
+                <h2>JOGOS VINDO</h2>
+            </div>
+        </div>
+
+        <div class="lista-jogos-futuros">
+            <div class="card-futuro">
+                <div class="aviso-futuro">IRÃO VIR</div>
+                <h3>JOGOS VINDO</h3>
+                <button class="botao-breve" disabled>EM BREVE</button>
+            </div>
+            <div class="card-futuro">
+                <div class="aviso-futuro">IRÃO VIR</div>
+                <h3>JOGOS VINDO</h3>
+                <button class="botao-breve" disabled>EM BREVE</button>
+            </div>
+            <div class="card-futuro">
+                <div class="aviso-futuro">IRÃO VIR</div>
+                <h3>JOGOS VINDO</h3>
+                <button class="botao-breve" disabled>EM BREVE</button>
+            </div>
+            <div class="card-futuro">
+                <div class="aviso-futuro">IRÃO VIR</div>
+                <h3>JOGOS VINDO</h3>
+                <button class="botao-breve" disabled>EM BREVE</button>
+            </div>
+        </div>
+    </section>
+
+
+    <div id="modalSobre" class="modal-container" style="display: none;">
+        <div class="modal-conteudo modal-sobre-conteudo">
+            <button class="fechar-modal" onclick="fecharModalSobre()">&times;</button>
+            <h2>ℹ️ Sobre Nós</h2>
+            <div class="texto-sobre-nos">
+                <p>O Clickpyjogos é uma plataforma criada para reunir e divulgar projetos desenvolvidos com Pygame,
+                    aproximando desenvolvedores, estudantes e pessoas curiosas sobre programação e desenvolvimento de
+                    jogos.</p>
+
+                <p>A ideia é simples: criar um espaço onde desenvolvedores possam publicar seus projetos, compartilhar
+                    suas criações e mostrar o que é possível fazer com Pygame, enquanto visitantes podem descobrir novos
+                    jogos, conhecer projetos diferentes e se interessar cada vez mais por programação.</p>
+
+                <p>Mais do que um site de jogos, o ClickPyJogos busca incentivar a curiosidade e o aprendizado,
+                    especialmente para quem está começando ou quer conhecer melhor o universo do Pygame e da criação de
+                    jogos em Python.</p>
+            </div>
+            <button class="btn-fechar-sobre" onclick="fecharModalSobre()">FECHAR</button>
+        </div>
+    </div>
+
+    <div id="modalFormulario" class="modal-container" style="display: none;">
+        <div class="modal-conteudo">
+            <button class="fechar-modal" onclick="fecharModal()">&times;</button>
+            <h2>ADICIONAR SEU JOGO!</h2>
+            <p style="font-size: 14px; margin-bottom: 20px; color: #444;">Preencha os dados abaixo para enviar seu
+                pedido de desenvolvedor no ClickPyJogos:</p>
+
+            <form id="formDev" onsubmit="validarEEnviar(event)">
+                <div class="campo">
+                    <label for="nome">Nome Completo:</label>
+                    <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+                </div>
+
+                <div class="campo">
+                    <label for="telefone">Telefone (com DDD):</label>
+                    <input type="tel" id="telefone" placeholder="(11) 99999-9999" required>
+                </div>
+
+                <div class="campo">
+                    <label for="idade">Idade (Mínimo 14 anos):</label>
+                    <input type="number" id="idade" placeholder="Ex: 16" min="1" required>
+                </div>
+
+                <div class="campo">
+                    <label for="email">E-mail de Contato:</label>
+                    <input type="email" id="email" placeholder="seuemail@exemplo.com" required>
+                </div>
+
+                <div id="mensagemErro" class="mensagem-erro" style="display: none;"></div>
+                <div id="mensagemSucesso" class="mensagem-sucesso" style="display: none;"></div>
+
+                <button type="submit" class="btn-enviar-pedido">ENVIAR PEDIDO</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="rodape">
+        <p class="rodape-frase">Diversão sem fim</p>
+        <div class="rodape-contato">
+            <strong>CLICKPYJOGOS</strong>
+            <a href="mailto:clickpyjogos@gmail.com">Contato: clickpyjogos@gmail.com</a>
+            <span>Telefone: +55 489855203</span>
+        </div>
+    </footer>
+
+    <script>
+
+        function abrirModalSobre() {
+            document.getElementById('modalSobre').style.display = 'flex'; // sobre
+        }
+
+        function fecharModalSobre() {
+            document.getElementById('modalSobre').style.display = 'none';
+        }
+
+
+        function abrirModal() {
+            document.getElementById('modalFormulario').style.display = 'flex';
+            document.getElementById('mensagemErro').style.display = 'none';
+            document.getElementById('mensagemSucesso').style.display = 'none';
+        }
+
+        function fecharModal() {
+            document.getElementById('modalFormulario').style.display = 'none';
+        }
+
+        function validarEEnviar(event) {
+            event.preventDefault();
+
+            var nome = document.getElementById('nome').value.trim();
+            var telefone = document.getElementById('telefone').value.trim();
+            var idade = parseInt(document.getElementById('idade').value);
+            var email = document.getElementById('email').value.trim();
+
+            var erroDiv = document.getElementById('mensagemErro');
+            var sucessoDiv = document.getElementById('mensagemSucesso');
+
+            erroDiv.style.display = 'none';
+            sucessoDiv.style.display = 'none';
+
+            if (nome.length < 3) {
+                erroDiv.innerText = 'Por favor, digite seu nome completo.';
+                erroDiv.style.display = 'block';
+                return;
+            }
+
+            var apenasNumeros = telefone.replace(/\D/g, '');
+            if (apenasNumeros.length < 10) {
+                erroDiv.innerText = 'Digite um número de telefone real com DDD (mínimo 10 dígitos).';
+                erroDiv.style.display = 'block';
+                return;
+            }
+
+            if (isNaN(idade) || idade < 14) {
+                erroDiv.innerText = 'A idade mínima para cadastrar seu jogo é 14 anos de idade!';
+                erroDiv.style.display = 'block';
+                return;
+            }
+
+            if (!email.includes('@') || !email.includes('.')) {
+                erroDiv.innerText = 'Por favor, insira um endereço de e-mail válido (ex: nome@email.com).';
+                erroDiv.style.display = 'block';
+                return;
+            }
+
+            sucessoDiv.innerText = 'SEU PEDIDO PARA SER UM DESENVOLVEDOR NO CLICKPYJOGOS FOI ENVIADO!';
+            sucessoDiv.style.display = 'block';
+
+            document.getElementById('formDev').reset();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ jogo.titulo }} - CLICKPYJOGOS</title>
+    <link rel="stylesheet" href="{% static 'paginas/estilo.css' %}?v=12">
+</head>
+
+<body>
+    <!-- Topo / Cabeçalho -->
+    <header class="topo">
+        <a class="logo" href="{% url 'inicio' %}">
+            <img src="{% static 'paginas/imagens/clickpyjogos_logo.png' %}" alt="CLICKPYJOGOS">
+        </a>
+
+        <nav class="menu">
+            <a href="{% url 'inicio' %}">Início</a>
+            <a href="{% url 'inicio' %}#jogos">Jogos</a>
+        </nav>
+    </header>
+
+    <main class="jogar-container">
+        <!-- Cabeçalho do jogo com botão voltar e título -->
+        <div class="cabecalho-jogo">
+            <a href="{% url 'inicio' %}" class="btn-voltar">← Voltar para o Início</a>
+            <h1 class="titulo-jogo">{{ jogo.titulo }}</h1>
+            <div class="barra-ferramentas">
+                <button class="btn-acao" onclick="recarregarJogo()">Reiniciar</button>
+                <button class="btn-tela-cheia" onclick="telaCheia()">Tela Cheia</button>
+            </div>
+        </div>
+
+        <!-- Janelinha do jogo -->
+        <div class="janela-jogo" id="janelaJogo">
+            <iframe id="iframeJogo"
+                src="{% static 'jogos/' %}{{ jogo.slug }}/index.html"
+                allow="autoplay; fullscreen; focus-without-user-activation *"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Controles abaixo da janela do jogo -->
+        <section class="painel-controles">
+            <h3>Controles do Jogo:</h3>
+            <div class="caixa-teclas">
+                {{ jogo.controles }}
+            </div>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <p class="rodape-frase">Diversão sem fim</p>
+        <div class="rodape-contato">
+            <strong>CLICKPYJOGOS</strong>
+            <a href="mailto:clickpyjogos@gmail.com">Contato: clickpyjogos@gmail.com</a>
+            <span>Telefone: +55 489855203</span>
+        </div>
+    </footer>
+
+    <script>
+        // Função simples para recarregar o iframe do jogo
+        function recarregarJogo() {
+            var iframe = document.getElementById('iframeJogo');
+            iframe.src = iframe.src;
+        }
+
+        // Função simples para colocar a janelinha do jogo em tela cheia
+        function telaCheia() {
+            var janela = document.getElementById('janelaJogo');
+            if (!document.fullscreenElement) {
+                if (janela.requestFullscreen) {
+                    janela.requestFullscreen();
+                } else if (janela.webkitRequestFullscreen) {
+                    janela.webkitRequestFullscreen();
+                } else if (janela.msRequestFullscreen) {
+                    janela.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
