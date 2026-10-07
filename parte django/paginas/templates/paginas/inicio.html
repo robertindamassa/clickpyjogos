@@ -53,7 +53,7 @@
             {% for jogo in jogos.values %}
             <div class="card-jogo">
                 <div class="capa-jogo">
-                    <img src="{% static jogo.imagem %}" alt="{{ jogo.titulo }}">
+                    <img src="{% static jogo.imagem %}?v=12" alt="{{ jogo.titulo }}">
                 </div>
                 <div class="info-jogo">
                     <h3>{{ jogo.nome }}</h3>
